@@ -135,3 +135,24 @@ class TestPhotometric:
                 255).astype(np.uint8)
             equalized_img = mmcv.imequalize(img)
             assert_array_equal(equalized_img, _imequalize(img))
+
+    # def test_adjust_sharpness(self, nb_rand_test=100):
+
+    # def _adjust_sharpness(img, factor):
+    #     from PIL import ImageEnhance,
+    #     pass
+    # pass
+    # img = np.array([[0, 128, 255], [1, 127, 254], [2, 129, 253]],
+    #                dtype=np.uint8)
+    # img = np.array([[1, 1, 1], [3, 4, 5], [6, 7, 8]],
+    #    dtype=np.uint8)
+    # img = np.stack([img, img, img], axis=-1)
+    # for _ in range(1):
+    #     img = np.clip(np.random.uniform(0, 1, (4, 5, 3)) * 260, 0,
+    #                   255).astype(np.uint8)
+    #     # sharpened_img = mmcv.adjust_sharpness(img)
+    #     assert_array_equal(equalized_img, _imequalize(img))
+
+
+# obj = TestPhotometric()
+# obj.test_adjust_sharpness()

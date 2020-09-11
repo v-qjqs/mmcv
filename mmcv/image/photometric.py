@@ -166,3 +166,24 @@ def imequalize(img):
     s3 = _scale_channel(img, 2)
     equalized_img = np.stack([s1, s2, s3], axis=-1)
     return equalized_img
+
+
+def adjust_sharpness(img, alpha=1.):
+    from PIL.ImageEnhance import Sharpness
+    from PIL import Image
+    kernel = np.array([[1, 1, 1], [1, 5, 1], [1, 1, 1]],
+                      dtype=np.float32) / 13.
+    degenerated = cv2.filter2D(img, -1, kernel, anchor=(-1, -1))
+    # print("degenerated: ", degenerated[..., 0])
+    # print("degenerated: ", degenerated)
+    # print("-----------------")
+    sharp = Sharpness(Image.fromarray(img.copy()))
+    # print(np.asarray(sharp.degenerate)[..., 0])
+    # print("-----------------")
+    # print('img: ', img[..., 0])
+    if not np.equal(np.asarray(sharp.degenerate)[..., 0], img[..., 0]).all():
+        print(np.asarray(sharp.degenerate)[..., 0])
+        print('------------------')
+        print('img: ', img[..., 0])
+    # print(np.asarray(sharp.degenerate))
+    return degenerated
