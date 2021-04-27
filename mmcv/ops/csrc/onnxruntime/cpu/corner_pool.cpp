@@ -49,8 +49,6 @@ void  MMCVTopPoolKernel::Compute(OrtKernelContext *context) {
     // allocate tmp and output memory
     OrtValue *output = ort_.KernelContext_GetOutput(context, 0, out_dimensions.data(), out_dimensions.size());
     T *output_data = ort_.GetTensorMutableData<T>(output);
-    // OrtTensorTypeAndShapeInfo *output_info = ort_.GetTensorTypeAndShape(output);
-    // ort_.ReleaseTensorTypeAndShapeInfo(output_info);
     T *tmp_output_data = (T *)allocator_.Alloc(sizeof(T) * input_height);
 
     // copy input_data to output_data

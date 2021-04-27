@@ -27,12 +27,7 @@ class TopPoolFunction(Function):
 
     @staticmethod
     def symbolic(g, input):
-        from ..onnx import is_custom_op_loaded
-        has_custom_op = is_custom_op_loaded()
-        if has_custom_op:
-            return g.op('mmcv::MMCVTopPool', input)
-        else:
-            raise NotImplementedError
+        return g.op('mmcv::MMCVTopPool', input)
 
 
 class BottomPoolFunction(Function):
