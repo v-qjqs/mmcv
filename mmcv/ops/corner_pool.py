@@ -25,6 +25,15 @@ class TopPoolFunction(Function):
         output = ext_module.top_pool_backward(input, grad_output)
         return output
 
+    @staticmethod
+    def symbolic(g, input):
+        from ..onnx import is_custom_op_loaded
+        has_custom_op = is_custom_op_loaded()
+        if has_custom_op:
+            return g.op('mmcv::MMCVTopPool', input)
+        else:
+            raise NotImplementedError
+
 
 class BottomPoolFunction(Function):
 
